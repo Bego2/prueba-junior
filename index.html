@@ -1,26 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="modern furniture online shop called mater">
-    <meta name="keywords" content="e-commerce, shop, furniture, mater">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="modern furniture online shop called mater"
+    />
+    <meta name="keywords" content="e-commerce, shop, furniture, mater" />
     <title>Prueba Junior</title>
-</head>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
 
-<body class="Body">
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
 
-    <header class="Header"> 
-        <h1 class="H1">mater</h1>
+  <body class="Body">
+    <header class="Header">
+      <h1 class="H1">mater</h1>
 
-        <div class="Menu">
-            
-        </div>
+      <menu class="Header-menu">
+        <span class="material-symbols-outlined Header-menuBurguer">menu</span>
+      </menu>
     </header>
+
+    <main class="Main">
+
+        <div id="page1" class="Tabs-contenido u-visible">
+            <h2 class="H2">Pagina 1</h2>
+            
+            </div>
     
-</body>
+          
+          </div>
+    
+          <div id="page2" class="Tabs-contenido">
+            <h2 class="H2">Pagina 2</h2>
+            </div>
+    
+          
+    
+       
+        
+    </main>
+
+    <menu class="Tabs">
+        <div class="Tabs-hr"></div>      
+        
+        <ul class="Tabs-buttons">
+        
+        <li data-tab="page1" class="Tabs-button u-active">
+          <p class="Tabs-txt">01</p>
+          <h2 class="Tabs-h2">Shell Dining Chair</h2>
+        </li>
+
+        <li data-tab="page2" class="Tabs-button">
+          <p class="Tabs-txt">02</p>
+          <h2 class="Tabs-h2">Dunes Anthrazite Black</h2>
+        </li>
+      </ul>
+    </menu>
+
+    <script>
+ // ____________________________________
+ // 1. Declaro nuestras constantes
+ // ____________________________________
+       
+ // Para el menu inferior Tabs
+        const list_btns = document.querySelectorAll(".Tabs-button");
+        
+        const list_pages = document.querySelectorAll(".Tab-content");
 
 
+        list_btns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                
+                const targetId = btn.dataset.tab; 
 
+                const target = document.getElementById(targetId); 
+
+                target.classList.add("u-visible");
+
+                btn.classList.add("u-active"); 
+            }); 
+
+        });
+
+        function quitarClases() {
+            list_btns.forEach(item => {
+                item.classList.remove("u-active");
+            });
+
+            list_pages.forEach(pagina => {
+                pagina.classList.remove("u-visible");
+            });
+        }
+
+ // ____________________________________
+ // Inicializo el programa
+ // ____________________________________
+ list_btns[0].click();
+
+
+    </script>
+  </body>
 </html>
