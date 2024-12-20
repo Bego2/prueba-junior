@@ -1,113 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="modern furniture online shop called mater"
-    />
-    <meta name="keywords" content="e-commerce, shop, furniture, mater" />
-    <title>Prueba Junior</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="modern furniture online shop called mater" />
+  <meta name="keywords" content="e-commerce, shop, furniture, mater" />
+  <title>Prueba Junior</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
 
-  <body class="Body">
-    <header class="Header">
-      <h1 class="H1">mater</h1>
+<body class="Body">
+  <header class="Header">
+    <h1 class="H1">mater</h1>
 
-      <menu class="Header-menu">
-        <span class="material-symbols-outlined Header-menuBurguer">menu</span>
-      </menu>
-    </header>
+    <div class="Header-menu">
+      <span class="material-symbols-outlined Header-menuBurguer">menu</span>
+    </div>
+  </header>
 
-    <main class="Main">
+  <main class="Main">
+    <div id="page1" class="Tabs-content u-visible">
+      <h2 class="H2">Pagina 1</h2>
+    </div>
 
-        <div id="page1" class="Tabs-contenido u-visible">
-            <h2 class="H2">Pagina 1</h2>
-            
-            </div>
-    
-          
-          </div>
-    
-          <div id="page2" class="Tabs-contenido">
-            <h2 class="H2">Pagina 2</h2>
-            </div>
-    
-          
-    
-       
-        
-    </main>
+    <div id="page2" class="Tabs-content">
+      <h2 class="H2">Pagina 2</h2>
+    </div>
+  </main>
 
-    <menu class="Tabs">
-        <div class="Tabs-hr"></div>      
-        
-        <ul class="Tabs-buttons">
-        
-        <li data-tab="page1" class="Tabs-button u-active">
-          <p class="Tabs-txt">01</p>
-          <h2 class="Tabs-h2">Shell Dining Chair</h2>
-        </li>
+  <nav class="Tabs">
+    <div class="Tabs-hr"></div>
 
-        <li data-tab="page2" class="Tabs-button">
-          <p class="Tabs-txt">02</p>
-          <h2 class="Tabs-h2">Dunes Anthrazite Black</h2>
-        </li>
-      </ul>
-    </menu>
+    <ul class="Tabs-buttons">
+      <li data-tab="page1" class="Tabs-button u-active">
+        <p class="Tabs-txt">01</p>
+        <h2 class="Tabs-h2">Shell Dining Chair</h2>
+      </li>
 
-    <script>
- // ____________________________________
- // 1. Declaro nuestras constantes
- // ____________________________________
-       
- // Para el menu inferior Tabs
-        const list_btns = document.querySelectorAll(".Tabs-button");
-        
-        const list_pages = document.querySelectorAll(".Tab-content");
+      <li data-tab="page2" class="Tabs-button">
+        <p class="Tabs-txt">02</p>
+        <h2 class="Tabs-h2">Dunes Anthrazite Black</h2>
+      </li>
+    </ul>
+  </nav>
 
+  <script>
+    // ____________________________________
+    // 1. Declaro nuestras constantes
+    // ____________________________________
 
-        list_btns.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                
-                const targetId = btn.dataset.tab; 
+    //Para el scroll
+    let lastScrollPosition = 0;
+    let currentPage = 1;
 
-                const target = document.getElementById(targetId); 
+    // Para el menu inferior Tabs
+    const list_btns = document.querySelectorAll(".Tabs-button");
+    const list_pages = document.querySelectorAll(".Tabs-content");
 
-                target.classList.add("u-visible");
+    // ____________________________________
+    // 2. Funciones
+    // ____________________________________
 
-                btn.classList.add("u-active"); 
-            }); 
+    function changePage(direction) {
+      if (direction === "down" && currentPage === 1) {
+        currentPage = 2;
+        activarTab("page2");
+      } else if (direction === "up" && currentPage === 2) {
+        currentPage = 1;
+        activarTab("page1");
+      }
+    }
 
-        });
+    function activarTab(targetId) {
+      quitarClases();
+      const target = document.getElementById(targetId);
+      const btn = document.querySelector(`[data-tab="${targetId}"]`);
+      target.classList.add("u-visible");
+      btn.classList.add("u-active");
+    }
 
-        function quitarClases() {
-            list_btns.forEach(item => {
-                item.classList.remove("u-active");
-            });
+    function quitarClases() {
+      list_btns.forEach((btn) => {
+        btn.classList.remove("u-active");
+      });
 
-            list_pages.forEach(page => {
-                page.classList.remove("u-visible");
-            });
-        }
+      list_pages.forEach((page) => {
+        page.classList.remove("u-visible");
+      });
+    }
 
- // ____________________________________
- // Inicializo el programa
- // ____________________________________
- list_btns[0].click();
+    // ____________________________________
+    // 3. Eventos
+    // ____________________________________
 
+    window.addEventListener("scroll", () => {
+      // const currentScrollPosition = window.scrollY;
+      const currentScrollPosition = document.documentElement.scrollTop || window.scrollY;
 
-    </script>
-  </body>
+      if (currentScrollPosition > lastScrollPosition) {
+        changePage("down");
+      } else if (currentScrollPosition < lastScrollPosition) {
+        changePage("up");
+      }
+
+      lastScrollPosition = currentScrollPosition;
+    });
+
+    // list_btns.forEach((btn) => {
+    //   btn.addEventListener("click", () => {
+    //     const targetId = btn.dataset.tab;
+
+    //     const target = document.getElementById(targetId);
+
+    //     quitarClases();
+
+    //     target.classList.add("u-visible");
+    //     btn.classList.add("u-active");
+    //   });
+    // });
+
+    // ____________________________________
+    // 3.  Inicializo el programa
+    // ____________________________________
+    activarTab("page1");
+  </script>
+</body>
+
 </html>

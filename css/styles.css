@@ -8,6 +8,7 @@
 .Body {
     display: flex;
     flex-direction: column;
+    /* height: 100vh; */
     height: 100vh;
 }
 
@@ -51,14 +52,6 @@ letter-spacing: -0.06rem;
  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-.u-active {
-    background-color: #fff;
-    border: 1px solid green;
-}
-
-.u-visible {
-    display: block;
-}
 
 /* ______________________________ */
 /*          MENU TABS             */
@@ -80,6 +73,19 @@ letter-spacing: -0.06rem;
     background-color: rgb(252, 252, 252);
 
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.Tabs-content {
+    display: none;
+}
+
+.u-visible {
+    display: block;
+}
+
+.u-active {
+    background-color: #fff;
+    border: 1px solid green;
 }
 
 .Tabs-buttons {
@@ -104,3 +110,4 @@ color: grey;
     color: grey;
     font-size: .75rem;
 }
+
