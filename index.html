@@ -35,14 +35,13 @@
     <main class="Main">
       <button class="ButtonProduct">Product Details</button>
 
-      <div id="page1" class="Tabs-content u-visible">
+      <!-- <div id="page1" class="Tabs-content u-visible">
         <h2 class="H2">Pagina 1</h2>
       </div>
 
       <div id="page2" class="Tabs-content">
         <h2 class="H2">Pagina 2</h2>
-        <!-- <button class="ButtonProduct">Product Details</button> -->
-      </div>
+      </div> -->
     </main>
 
     <nav class="Tabs">
@@ -72,7 +71,7 @@
           product: "Shell Dining Chair",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
-          img: "silla_negra.png",
+          file: "silla_negra.png",
           alt: "Shell Dining Chair in black",
         },
         {
@@ -81,41 +80,17 @@
           product: "Dunes Anthrazite Black",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
-          img: "mesa_negra.png",
+            file: "mesa_negra.png",
           alt: "Dunes Anthrazite table in black",
         },
       ];
       const main = document.querySelector(".Main");
-      const list_btns = document.querySelectorAll(".Tabs-h2");
-      const list_pages = document.querySelectorAll(".Tabs-content");
+      const list_btns = document.querySelectorAll(".Tabs-button");
+      // const list_pages = document.querySelectorAll(".Tabs-content");
 
       // ____________________________________
       // Funciones
       // ____________________________________
-
-      // Activar la tab correspondiente
-      function activarTab(index) {
-        list_btns.forEach((btn, idx) => {
-          if (idx === index) {
-            btn.classList.add("u-active");
-          } else {
-            btn.classList.remove("u-active");
-          }
-        });
-      }
-
-      // Detectar la sección visible y activar transiciones
-      function detectarSeccion() {
-        list_pages.forEach((page, index) => {
-          const rect = page.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-            page.classList.add("u-visible"); // Activar la animación
-            activarTab(index); // Cambiar tab activa
-          } else {
-            page.classList.remove("u-visible"); // Ocultar la animación si no es visible
-          }
-        });
-      }
 
       tabsInfo.forEach((tab, index) => {
         const tabContent = document.createElement("div");
@@ -124,6 +99,11 @@
         if (index === 0) tabContent.classList.add("u-visible");
         tabContent.setAttribute("id", tab.id);
 
+
+        // [DIV: TEXTOS]
+        const textContainer = document.createElement("div");
+        textContainer.classList.add("Main-texts");
+        
         // creamos el autor <h4>
         const h4 = document.createElement("h4");
         h4.classList.add("H4");
@@ -135,25 +115,68 @@
         h2.textContent = tab.product;
 
         const txt = document.createElement("p");
-        txt.classList.add("Main-txt");
+        txt.classList.add("Main-description");
         txt.textContent = tab.description;
+
+       // [DIV: IMAGEN]
 
         //creamos etiqueta <img>
         const img = document.createElement("img");
         img.classList.add("Main-img");
-        img.src = `imgs/${tab.img}`;
+        img.src = `img/${tab.file}`;
         img.alt = tab.alt;
 
-        // Añadir los elementos a tabContent, pasarán a ser hijos.
-        tabContent.appendChild(h4);
-        tabContent.appendChild(h2);
-        tabContent.appendChild(txt);
+        // TextContainer es el contenedor padre de los textos del producto
+        textContainer.appendChild(h4);
+        textContainer.appendChild(h2);
+        textContainer.appendChild(txt);
 
-        tabContent.appendChild(img);
+        // TabContent el contenedor padre de la caja de txts y de la imagen 
+        tabContent.appendChild(img)
+        tabContent.appendChild(textContainer);
+      ;
 
-        // Insertar el tabContent en el Main como hijo
+        // Main el el contenedor padre tabContent
         main.appendChild(tabContent);
       });
+
+      const list_pages = document.querySelectorAll(".Tabs-content");
+
+      // Activar la tab correspondiente
+      function activarTab(index) {
+        // Actualizar los botones
+        list_btns.forEach((btn, idx) => {
+          if (idx === index) {
+            btn.classList.add("u-active");
+          } else {
+            btn.classList.remove("u-active");
+          }
+        });
+
+        // Actualizar las páginas visibles
+        list_pages.forEach((page, idx) => {
+          if (idx === index) {
+            page.classList.add("u-visible");
+          } else {
+            page.classList.remove("u-visible");
+          }
+        });
+      }
+
+      // Detectar la sección visible y activar transiciones
+      function detectarSeccion() {
+        list_pages.forEach((page, index) => {
+          const rect = page.getBoundingClientRect();
+
+          // Si la sección está visible (en la mitad de la pantalla), activarla
+          if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+            page.classList.add("u-visible"); // Activar la animación
+            activarTab(index); // Cambiar tab activa
+          } else {
+            page.classList.remove("u-visible"); // Ocultar la animación si no es visible
+          }
+        });
+      }
 
       // ____________________________________
       // Eventos

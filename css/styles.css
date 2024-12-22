@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -46,6 +45,7 @@
   ); /* Altura ajustada: total menos header y tabs */
   background-color: rgb(255, 141, 141);
   font-family: "Roboto", Arial, Helvetica, sans-serif;
+
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scrollbar-width: none; /* Para ocultar las barras de scroll drchs*/
@@ -81,37 +81,72 @@
 }
 
 .Tabs-content {
-  display: block;
+    display: block;
+    flex-direction: column;
   height: 100%;
+  padding: 2.5rem 2rem;
+
   scroll-snap-align: start;
-  margin-top: 3rem;
 
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 1s ease;
 }
 
+.Main-texts {
+  flex: 1;
+  text-align: left;
+  background-color: aqua;
+  margin-top: 5rem;
+}
+
+.H4 {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(118, 118, 118);
+}
+
+.H2 {
+  font-size: 1.25rem;
+  margin: 1rem 0rem;
+}
+
+.Main-description {
+  font-size: 0.8rem;
+  color: rgb(76, 76, 76);
+}
+
+.Main-img {
+  width: 15.75rem;
+  height: 15.75rem;
+  display: flex;
+  align-items: center;
+}
+
+/* UTILITIES  */
 .u-visible {
   display: block;
   opacity: 1;
-  transform: translateY(0); 
-   /* Se muestra, si antes estaba desplazado en el eje Y 50px y ademas sin opacidad, ahora se coloca en su posicion normal y se muestra (opac 1) */
+  transform: translateY(0);
+  /* Se muestra, si antes estaba desplazado en el eje Y 50px y ademas sin opacidad, ahora se coloca en su posicion normal y se muestra (opac 1) */
 }
 
 .u-active {
-  background-color: #fff;
   border: 1px solid green;
 }
 
+/* BOTON PRODUCT FIXED  */
 .ButtonProduct {
-    background-color: black;
-    color:white;
-    padding: .25rem;
-    justify-content: center;
-    position: fixed;
-    left: 3rem;
-    top: 50%;
-    transform: translateY(-50%); 
+  position: fixed;
+  bottom: 22%;
+  transform: translateY(-50%);
+
+  justify-content: center;
+  padding: 0.8rem;
+  margin-left: 2rem;
+
+  background-color: black;
+  color: white;
+  border: none;
 }
 
 /* NAV  */
