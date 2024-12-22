@@ -1,135 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="modern furniture online shop called mater"
+    />
+    <meta name="keywords" content="e-commerce, shop, furniture, mater" />
+    <title>Prueba Junior</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="modern furniture online shop called mater" />
-  <meta name="keywords" content="e-commerce, shop, furniture, mater" />
-  <title>Prueba Junior</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
 
-  <link rel="stylesheet" href="./css/styles.css" />
-</head>
+  <body class="Body">
+    <header class="Header">
+      <h1 class="H1">mater</h1>
 
-<body class="Body">
-  <header class="Header">
-    <h1 class="H1">mater</h1>
+      <div class="Header-menu">
+        <span class="material-symbols-outlined Header-menuBurguer">menu</span>
+      </div>
+    </header>
 
-    <div class="Header-menu">
-      <span class="material-symbols-outlined Header-menuBurguer">menu</span>
-    </div>
-  </header>
+    <main class="Main">
+      <button class="ButtonProduct">Product Details</button>
 
-  <main class="Main">
-    <div id="page1" class="Tabs-content u-visible">
-      <h2 class="H2">Pagina 1</h2>
-    </div>
+      <div id="page1" class="Tabs-content u-visible">
+        <h2 class="H2">Pagina 1</h2>
+      </div>
 
-    <div id="page2" class="Tabs-content">
-      <h2 class="H2">Pagina 2</h2>
-    </div>
-  </main>
+      <div id="page2" class="Tabs-content">
+        <h2 class="H2">Pagina 2</h2>
+        <!-- <button class="ButtonProduct">Product Details</button> -->
+      </div>
+    </main>
 
-  <nav class="Tabs">
-    <div class="Tabs-hr"></div>
+    <nav class="Tabs">
+      <div class="Tabs-hr"></div>
 
-    <ul class="Tabs-buttons">
-      <li data-tab="page1" class="Tabs-button u-active">
-        <p class="Tabs-txt">01</p>
-        <h2 class="Tabs-h2">Shell Dining Chair</h2>
-      </li>
+      <ul class="Tabs-buttons">
+        <li data-tab="page1" class="Tabs-button u-active">
+          <p class="Tabs-txt">01</p>
+          <h2 class="Tabs-h2">Shell Dining Chair</h2>
+        </li>
 
-      <li data-tab="page2" class="Tabs-button">
-        <p class="Tabs-txt">02</p>
-        <h2 class="Tabs-h2">Dunes Anthrazite Black</h2>
-      </li>
-    </ul>
-  </nav>
+        <li data-tab="page2" class="Tabs-button">
+          <p class="Tabs-txt">02</p>
+          <h2 class="Tabs-h2">Dunes Anthrazite Black</h2>
+        </li>
+      </ul>
+    </nav>
 
-  <script>
-    // ____________________________________
-    // 1. Declaro nuestras constantes
-    // ____________________________________
+    <script>
+      // ____________________________________
+      // Variables
+      // ____________________________________
+      const tabsInfo = [
+        {
+          id: "page1",
+          author: "Michael W. Dreeben",
+          product: "Shell Dining Chair",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
+          img: "silla_negra.png",
+          alt: "Shell Dining Chair in black",
+        },
+        {
+          id: "page2",
+          author: "Jeaper K. Thomas",
+          product: "Dunes Anthrazite Black",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
+          img: "mesa_negra.png",
+          alt: "Dunes Anthrazite table in black",
+        },
+      ];
+      const main = document.querySelector(".Main");
+      const list_btns = document.querySelectorAll(".Tabs-h2");
+      const list_pages = document.querySelectorAll(".Tabs-content");
 
-    //Para el scroll
-    let lastScrollPosition = 0;
-    let currentPage = 1;
+      // ____________________________________
+      // Funciones
+      // ____________________________________
 
-    // Para el menu inferior Tabs
-    const list_btns = document.querySelectorAll(".Tabs-button");
-    const list_pages = document.querySelectorAll(".Tabs-content");
-
-    // ____________________________________
-    // 2. Funciones
-    // ____________________________________
-
-    function changePage(direction) {
-      if (direction === "down" && currentPage === 1) {
-        currentPage = 2;
-        activarTab("page2");
-      } else if (direction === "up" && currentPage === 2) {
-        currentPage = 1;
-        activarTab("page1");
-      }
-    }
-
-    function activarTab(targetId) {
-      quitarClases();
-      const target = document.getElementById(targetId);
-      const btn = document.querySelector(`[data-tab="${targetId}"]`);
-      target.classList.add("u-visible");
-      btn.classList.add("u-active");
-    }
-
-    function quitarClases() {
-      list_btns.forEach((btn) => {
-        btn.classList.remove("u-active");
-      });
-
-      list_pages.forEach((page) => {
-        page.classList.remove("u-visible");
-      });
-    }
-
-    // ____________________________________
-    // 3. Eventos
-    // ____________________________________
-
-    window.addEventListener("scroll", () => {
-      // const currentScrollPosition = window.scrollY;
-      const currentScrollPosition = document.documentElement.scrollTop || window.scrollY;
-
-      if (currentScrollPosition > lastScrollPosition) {
-        changePage("down");
-      } else if (currentScrollPosition < lastScrollPosition) {
-        changePage("up");
+      // Activar la tab correspondiente
+      function activarTab(index) {
+        list_btns.forEach((btn, idx) => {
+          if (idx === index) {
+            btn.classList.add("u-active");
+          } else {
+            btn.classList.remove("u-active");
+          }
+        });
       }
 
-      lastScrollPosition = currentScrollPosition;
-    });
+      // Detectar la sección visible y activar transiciones
+      function detectarSeccion() {
+        list_pages.forEach((page, index) => {
+          const rect = page.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+            page.classList.add("u-visible"); // Activar la animación
+            activarTab(index); // Cambiar tab activa
+          } else {
+            page.classList.remove("u-visible"); // Ocultar la animación si no es visible
+          }
+        });
+      }
 
-    // list_btns.forEach((btn) => {
-    //   btn.addEventListener("click", () => {
-    //     const targetId = btn.dataset.tab;
+      tabsInfo.forEach((tab, index) => {
+        const tabContent = document.createElement("div");
+        tabContent.classList.add("Tabs-content");
 
-    //     const target = document.getElementById(targetId);
+        if (index === 0) tabContent.classList.add("u-visible");
+        tabContent.setAttribute("id", tab.id);
 
-    //     quitarClases();
+        // creamos el autor <h4>
+        const h4 = document.createElement("h4");
+        h4.classList.add("H4");
+        h4.textContent = tab.author;
 
-    //     target.classList.add("u-visible");
-    //     btn.classList.add("u-active");
-    //   });
-    // });
+        // creamos el titulo del producto <h2>
+        const h2 = document.createElement("h2");
+        h2.classList.add("H2");
+        h2.textContent = tab.product;
 
-    // ____________________________________
-    // 3.  Inicializo el programa
-    // ____________________________________
-    activarTab("page1");
-  </script>
-</body>
+        const txt = document.createElement("p");
+        txt.classList.add("Main-txt");
+        txt.textContent = tab.description;
 
+        //creamos etiqueta <img>
+        const img = document.createElement("img");
+        img.classList.add("Main-img");
+        img.src = `imgs/${tab.img}`;
+        img.alt = tab.alt;
+
+        // Añadir los elementos a tabContent, pasarán a ser hijos.
+        tabContent.appendChild(h4);
+        tabContent.appendChild(h2);
+        tabContent.appendChild(txt);
+
+        tabContent.appendChild(img);
+
+        // Insertar el tabContent en el Main como hijo
+        main.appendChild(tabContent);
+      });
+
+      // ____________________________________
+      // Eventos
+      // ____________________________________
+
+      // Detectar scroll en el contenedor principal
+      main.addEventListener("scroll", detectarSeccion);
+
+      // Inicializar la primera tab
+      activarTab(0);
+    </script>
+  </body>
 </html>

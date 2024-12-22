@@ -1,113 +1,140 @@
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 .Body {
-    display: flex;
-    flex-direction: column;
-    /* height: 100vh; */
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
-
 
 /* ______________________________ */
 /*            HEADER              */
 /* ______________________________ */
 
-
-.Header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 5rem;
-    padding: 2rem 1.9rem ;
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  padding: 2rem 1.9rem;
 }
 .H1 {
-font-size: 1.5rem;
-letter-spacing: -0.06rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.06rem;
 }
 
 .Header-menu {
- 
-    padding: 0;
+  padding: 0;
 }
 
 .Header-menuBurguer {
-    border: 1px solid grey;
-    
-} 
-
+  border: 1px solid grey;
+}
 
 /* ______________________________ */
 /*            MAIN                */
 /* ______________________________ */
 
 .Main {
- height: 100%;
- background-color: rgb(255, 141, 141);
- font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  height: calc(
+    100vh - 5rem - 4rem
+  ); /* Altura ajustada: total menos header y tabs */
+  background-color: rgb(255, 141, 141);
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none; /* Para ocultar las barras de scroll drchs*/
+
+  /* PD. snap y mandatory -> Permite que al soltar el scroll en el eje vertical (y) te muestre la tab adecuada y no se quede a mitad de camin.  Ya que se engancha (snap) a la seccion tab mas cercana y la muestra completa y encajada en pantalla */
 }
 
+.Main::-webkit-scrollbar {
+  display: none;
+  /* Para ocultar las barras de scroll drchs en los naveg que usan webkit*/
+}
 
 /* ______________________________ */
 /*          MENU TABS             */
 /* ______________________________ */
 
 .Tabs-hr {
-    width: 100%;
-    height: .0625rem;
-    background-color: grey;
-    margin-bottom: .75rem;
+  width: 100%;
+  height: 0.0625rem;
+  background-color: grey;
+  margin-bottom: 0.75rem;
 }
 .Tabs {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: end;
-    position: fixed;
-    bottom: 0;
-    background-color: rgb(252, 252, 252);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: end;
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(252, 252, 252);
 
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 .Tabs-content {
-    display: none;
+  display: block;
+  height: 100%;
+  scroll-snap-align: start;
+  margin-top: 3rem;
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 2s ease, transform 2s ease;
 }
 
 .u-visible {
-    display: block;
+  display: block;
+  opacity: 1;
+  transform: translateY(0); 
+   /* Se muestra, si antes estaba desplazado en el eje Y 50px y ademas sin opacidad, ahora se coloca en su posicion normal y se muestra (opac 1) */
 }
 
 .u-active {
-    background-color: #fff;
-    border: 1px solid green;
+  background-color: #fff;
+  border: 1px solid green;
 }
 
+.ButtonProduct {
+    background-color: black;
+    color:white;
+    padding: .25rem;
+    justify-content: center;
+    position: fixed;
+    left: 3rem;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+/* NAV  */
+
 .Tabs-buttons {
-    display: flex;
-    flex-direction: row;
-    padding: 1rem;
-    gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  gap: 2rem;
 }
 
 .Tabs-button {
-    display: flex;
-    flex-direction: column;
-    
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
 }
 
 .Tabs-txt {
-color: grey;
+  color: grey;
 }
 
 .Tabs-h2 {
-    color: grey;
-    font-size: .75rem;
+  color: grey;
+  font-size: 0.75rem;
 }
-
