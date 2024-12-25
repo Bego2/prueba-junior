@@ -25,23 +25,51 @@
 
   <body class="Body">
     <header class="Header">
-      <h1 class="H1">mater</h1>
+      <h1 class="Logo">mater</h1>
 
-      <div class="Header-menu">
-        <span class="material-symbols-outlined Header-menuBurguer">menu</span>
-      </div>
+      <button class="Header-button" id="openMenu">
+        <span class="Header-googleIcon material-symbols-outlined">menu</span>
+      </button>
     </header>
+
+    <!-- Menu oculto, aparece de derecha a izq -->
+    <div class="Menu-hidden" id="menuHidden">
+      <header class="Header">
+        <h2 class="Logo--white">mater</h2>
+        <button class="Header-button--white" id="closeMenu"><span class="Header-googleIcon--white material-symbols-outlined">
+          close
+          </span></button>
+      </header>
+
+      <nav class="Menu-content">
+        <ul class="Menu-links">
+          <li><a href="" class="Menu-li">Collection</a></li>
+          <li><a href="" class="Menu-li">Design</a></li>
+          <li><a href="" class="Menu-li">Craftsmanship</a></li>
+          <li><a href="" class="Menu-li">Ethics</a></li>
+        </ul>
+      </nav>
+      
+      <footer class="Menu-footer">
+        <ul class="Menu-footerColumn">
+          <li><a href="" class="Menu-footerLi">About</a></li>
+          <li><a href="" class="Menu-footerLi">News</a></li>
+        </ul>
+
+        <ul class="Menu-footerColumn">
+          <li><a href="" class="Menu-footerLi">Contact</a></li>
+          <li><a href="" class="Menu-footerLi">Care</a></li>
+        </ul>
+
+        <ul class="Menu-footerColumn">
+          <li><a href="" class="Menu-footerLi">Dealers</a></li>
+          <li><a href="" class="Menu-footerLi">Press</a></li>
+        </ul>
+      </footer>
+    </div>
 
     <main class="Main">
       <button class="ButtonProduct">Product Details</button>
-
-      <!-- <div id="page1" class="Tabs-content u-visible">
-        <h2 class="H2">Pagina 1</h2>
-      </div>
-
-      <div id="page2" class="Tabs-content">
-        <h2 class="H2">Pagina 2</h2>
-      </div> -->
     </main>
 
     <nav class="Tabs">
@@ -80,18 +108,23 @@
           product: "Dunes Anthrazite Black",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
-            file: "mesa_negra.png",
+          file: "mesa_negra.png",
           alt: "Dunes Anthrazite table in black",
         },
       ];
       const main = document.querySelector(".Main");
       const list_btns = document.querySelectorAll(".Tabs-button");
-      // const list_pages = document.querySelectorAll(".Tabs-content");
 
+      // Menu hidden
+      const body = document.querySelector("body");
+      const menuIcon = document.getElementById("openMenu");
+      const menuHidden = document.getElementById("menuHidden");
+      const closeMenu = document.getElementById("closeMenu");
       // ____________________________________
-      // Funciones
+      // Bucles y Funciones
       // ____________________________________
 
+      // tabsInfo es un bucle que crea para cada tab su contenido,
       tabsInfo.forEach((tab, index) => {
         const tabContent = document.createElement("div");
         tabContent.classList.add("Tabs-content");
@@ -99,11 +132,10 @@
         if (index === 0) tabContent.classList.add("u-visible");
         tabContent.setAttribute("id", tab.id);
 
-
         // [DIV: TEXTOS]
         const textContainer = document.createElement("div");
         textContainer.classList.add("Main-texts");
-        
+
         // creamos el autor <h4>
         const h4 = document.createElement("h4");
         h4.classList.add("H4");
@@ -114,11 +146,16 @@
         h2.classList.add("H2");
         h2.textContent = tab.product;
 
+        //creamos el parrafo de la descripcion <p>
         const txt = document.createElement("p");
         txt.classList.add("Main-description");
         txt.textContent = tab.description;
 
-       // [DIV: IMAGEN]
+        // [DIV: IMAGEN]
+
+        //creamos un contenedor para la img <div>
+        const imgContainer = document.createElement("div");
+        imgContainer.classList.add("Img-container");
 
         //creamos etiqueta <img>
         const img = document.createElement("img");
@@ -126,16 +163,15 @@
         img.src = `img/${tab.file}`;
         img.alt = tab.alt;
 
-        // TextContainer es el contenedor padre de los textos del producto
+        // TextContainer es el contenedor padre de los txts del producto
+        imgContainer.appendChild(img);
         textContainer.appendChild(h4);
         textContainer.appendChild(h2);
         textContainer.appendChild(txt);
 
-        // TabContent el contenedor padre de la caja de txts y de la imagen 
-        tabContent.appendChild(img)
+        // TabContent el contenedor padre de la caja de txts y de la imagen
+        tabContent.appendChild(imgContainer);
         tabContent.appendChild(textContainer);
-      ;
-
         // Main el el contenedor padre tabContent
         main.appendChild(tabContent);
       });
@@ -181,6 +217,17 @@
       // ____________________________________
       // Eventos
       // ____________________________________
+
+      // Abrir y cerrar el Hidden Menu
+      menuIcon.addEventListener("click", () => {
+        menuHidden.classList.add("u-menuOpen");
+        body.classList.add(".is-menuOpen");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        menuHidden.classList.remove("u-menuOpen");
+        body.classList.remove(".is-menuOpen");
+      });
 
       // Detectar scroll en el contenedor principal
       main.addEventListener("scroll", detectarSeccion);
