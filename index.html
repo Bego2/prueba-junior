@@ -33,23 +33,34 @@
     </header>
 
     <!-- Menu oculto, aparece de derecha a izq -->
-    <div class="Menu-hidden" id="menuHidden">
+    <div class="Menu-hidden" id="menu">
       <header class="Header">
         <h2 class="Logo--white">mater</h2>
-        <button class="Header-button--white" id="closeMenu"><span class="Header-googleIcon--white material-symbols-outlined">
-          close
-          </span></button>
+        <button class="Header-button Header-button--white" id="closeMenu">
+          <span class="Header-googleIcon--white material-symbols-outlined">
+            close
+          </span>
+        </button>
       </header>
 
       <nav class="Menu-content">
         <ul class="Menu-links">
-          <li><a href="" class="Menu-li">Collection</a></li>
-          <li><a href="" class="Menu-li">Design</a></li>
-          <li><a href="" class="Menu-li">Craftsmanship</a></li>
-          <li><a href="" class="Menu-li">Ethics</a></li>
+          <!-- Menú principal con submenú -->
+          <li class="Menu-item">
+            <a href="#" class="Menu-li">Collection</a>
+            <ul class="Submenu">
+              <li><a href="#" class="Submenu-li">Furniture</a></li>
+              <li><a href="#" class="Submenu-li">Lighting</a></li>
+              <li><a href="#" class="Submenu-li">Accessories</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#" class="Menu-li">Design</a></li>
+          <li><a href="#" class="Menu-li">Craftsmanship</a></li>
+          <li><a href="#" class="Menu-li">Ethics</a></li>
         </ul>
       </nav>
-      
+
       <footer class="Menu-footer">
         <ul class="Menu-footerColumn">
           <li><a href="" class="Menu-footerLi">About</a></li>
@@ -76,9 +87,9 @@
       <div class="Tabs-hr"></div>
 
       <ul class="Tabs-buttons">
-        <li data-tab="page1" class="Tabs-button u-active">
+        <li data-tab="page1" class="Tabs-button">
           <p class="Tabs-txt">01</p>
-          <h2 class="Tabs-h2">Shell Dining Chair</h2>
+          <h2 class="Tabs-h2 u-active">Shell Dining Chair</h2>
         </li>
 
         <li data-tab="page2" class="Tabs-button">
@@ -113,13 +124,16 @@
         },
       ];
       const main = document.querySelector(".Main");
-      const list_btns = document.querySelectorAll(".Tabs-button");
+      const list_btns = document.querySelectorAll(".Tabs-h2");
 
-      // Menu hidden
+      //  const btns_tab = document.querySelectorAll(".Tabs-button");
+
+      // Menu
       const body = document.querySelector("body");
       const menuIcon = document.getElementById("openMenu");
-      const menuHidden = document.getElementById("menuHidden");
+      const menu = document.getElementById("menu");
       const closeMenu = document.getElementById("closeMenu");
+
       // ____________________________________
       // Bucles y Funciones
       // ____________________________________
@@ -178,7 +192,15 @@
 
       const list_pages = document.querySelectorAll(".Tabs-content");
 
-      // Activar la tab correspondiente
+      // ACTIVAR LA TAB CORRESPONDIENTE CON CLICK
+      list_btns.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          console.log(`Tab clickeada: ${index}`);
+          activarTab(index);
+        });
+      });
+
+      // ACTIVAR LA TAB CORRESPONDIENTE CON SCROLL
       function activarTab(index) {
         // Actualizar los botones
         list_btns.forEach((btn, idx) => {
@@ -193,6 +215,8 @@
         list_pages.forEach((page, idx) => {
           if (idx === index) {
             page.classList.add("u-visible");
+            console.log(`Mostrando página: ${page.id}`);
+
           } else {
             page.classList.remove("u-visible");
           }
@@ -218,15 +242,34 @@
       // Eventos
       // ____________________________________
 
-      // Abrir y cerrar el Hidden Menu
+      // Abrir y cerrar el  Menu
       menuIcon.addEventListener("click", () => {
-        menuHidden.classList.add("u-menuOpen");
-        body.classList.add(".is-menuOpen");
+        body.classList.add("is-menuOpen");
+        menu.classList.add("u-menuOpen");
       });
 
       closeMenu.addEventListener("click", () => {
-        menuHidden.classList.remove("u-menuOpen");
-        body.classList.remove(".is-menuOpen");
+        body.classList.remove("is-menuOpen");
+        menu.classList.remove("u-menuOpen");
+      });
+
+      // Seleccionar todos los elementos del menú principal
+      const menuItems = document.querySelectorAll(".Menu-item");
+
+      // Recorrer cada elemento y agregar un event listener
+      menuItems.forEach((item) => {
+        const link = item.querySelector(".Menu-li"); // El enlace principal
+        const submenu = item.querySelector(".Submenu"); // El submenú
+
+        if (submenu) {
+          // Agregar evento de clic
+          link.addEventListener("click", (event) => {
+            event.preventDefault(); // Evitar comportamiento por defecto
+
+            // Alternar la clase para mostrar/ocultar el submenú
+            submenu.classList.toggle("is-submenuOpen");
+          });
+        }
       });
 
       // Detectar scroll en el contenedor principal

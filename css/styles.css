@@ -29,28 +29,29 @@
 }
 
 .Header-button {
+  width: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border: 1px solid grey;
-  padding: 0;
   background: none;
 }
 
-.Header-button {
-  border: 1px solid white;
+.Header-button--white {
+  height: 1.8rem;
+  font-size: 1rem;
 }
 
-  .Header-googleIcon {
-    padding: 0rem 0.3rem;
-    margin: 0;
-    line-height: 1.1; 
-}  
+.Header-googleIcon {
+  padding: 0rem 0.3rem;
+  margin: 0;
+  line-height: 1.1;
+}
 
 .Header-googleIcon--white {
-  color: white;
-}  
-
- 
-
+  color: rgb(255, 255, 255);
+}
 
 /* ______________________________ */
 /*          MENU HIDDEN           */
@@ -74,14 +75,28 @@
   ); /* El menu esta totalmente fuera de la pantalla, desplazado en la horizontal (ejeX) */
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 2s ease, opacity 1s ease;
   background-color: black;
-  
 }
 
 .Menu-content {
   padding: 0rem 4rem;
   color: white;
+  animation: aparicion 4s ease-out 1s forwards;
+  opacity: 0;
+  transform: translateY(10%);
+}
+
+@keyframes aparicion {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
 
 .Menu-links {
@@ -91,16 +106,24 @@
   font-size: 2.1rem;
   text-decoration: none;
   list-style: none;
-
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .Menu-li {
   color: white;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
   text-decoration: none;
   list-style: none;
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: 0.5rem;
+
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10%);
+  animation: aparicion 4s ease-out 1s forwards;
 }
 
 .Menu-footer {
@@ -108,8 +131,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   text-align: left;
-  padding: 4rem 4rem;
-
+  padding: 3rem 4rem;
 }
 
 .Menu-footerColumn {
@@ -123,7 +145,7 @@
   color: grey;
   text-decoration: none;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .u-menuOpen {
@@ -135,11 +157,35 @@
   z-index: 9999; /* Posiciona el menu al frente */
 }
 
-.is-menuOpen {
-  /* la aplicamos a body -> cuando menu hidden se despliega, body se "bloquea" no hace ni scroll, ni interacciones */
+/* SUBMENU */
+
+.Submenu {
+  /* oculto por defecto */
+  display: none;
   opacity: 0;
-  pointer-events: none;
+  visibility: hidden;
   overflow: hidden;
+  transform: translateY(-10%);
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.Submenu.is-submenuOpen {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  max-height: 10rem; /* limitamos su altura max */
+}
+
+.Submenu-li {
+  font-size: 0.8rem;
+  color: gray;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.Submenu-li:hover {
+  color: white;
 }
 
 /* ______________________________ */
@@ -150,16 +196,14 @@
   height: calc(
     100vh - 5rem - 4rem
   ); /* Altura ajustada: total menos header y tabs */
-  background-color: rgb(255, 141, 141);
   font-family: "Roboto", Arial, Helvetica, sans-serif;
 
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scrollbar-width: none; /* Para ocultar las barras de scroll drchs*/
-
   pointer-events: auto; /* cuando desaparece menu, se puede interactuar con normalidad */
 
-  /* PD. snap y mandatory -> Permite que al soltar el scroll en el eje vertical (y) te muestre la tab adecuada y no se quede a mitad de camin.  Ya que se engancha (snap) a la seccion tab mas cercana y la muestra completa y encajada en pantalla */
+  /* PD. snap y mandatory -> Permite que al soltar el scroll en el eje vertical (y) te muestre la tab adecuada y no se quede a mitad de camino.  Ya que se engancha (snap) a la seccion tab mas cercana y la muestra completa y encajada en pantalla */
 }
 
 .Main::-webkit-scrollbar {
@@ -199,7 +243,6 @@
 .Main-texts {
   flex: 1;
   text-align: left;
-  background-color: aqua;
   margin-top: 3rem;
 }
 
@@ -224,11 +267,16 @@
   display: block;
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
   /* Se muestra, si antes estaba desplazado en el eje Y 50px y ademas sin opacidad, ahora se coloca en su posicion normal y se muestra (opac 1) */
+}
+.Tabs-h2 {
+  color: grey;
+  font-size: 0.75rem;
 }
 
 .u-active {
-  border: 1px solid green;
+  color: black;
 }
 
 /* BOTON PRODUCT FIXED */
@@ -285,9 +333,4 @@
 
 .Tabs-txt {
   color: grey;
-}
-
-.Tabs-h2 {
-  color: grey;
-  font-size: 0.75rem;
 }
