@@ -2,40 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta
       name="description"
-      content="modern furniture online shop called mater"
-    />
-    <meta name="keywords" content="e-commerce, shop, furniture, mater" />
+      content="modern furniture online shop called mater"/>
+    <meta name="keywords" content="e-commerce, shop, furniture, mater"/>
     <title>Prueba Junior</title>
 
+    <!-- Links -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
 
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css"/>
+
+
   </head>
 
   <body class="Body">
+
+    <!-- HEADER -->
     <header class="Header">
-      <h1 class="Logo">mater</h1>
+      <h1> <a href="index.html" class="Logo">mater</a></h1>
 
       <button class="Header-button" id="openMenu">
         <span class="Header-googleIcon material-symbols-outlined">menu</span>
       </button>
     </header>
 
-    <!-- Menu oculto, aparece de derecha a izq -->
+    <!-- MENU OCULTO, aparece de derecha a izq -->
     <div class="Menu-hidden" id="menu">
       <header class="Header">
-        <h2 class="Logo--white">mater</h2>
+        <h2> <a href="index.html" class="Logo--white">mater</a></h2>
         <button class="Header-button Header-button--white" id="closeMenu">
           <span class="Header-googleIcon--white material-symbols-outlined">
             close
@@ -45,13 +47,25 @@
 
       <nav class="Menu-content">
         <ul class="Menu-links">
-          <!-- Menú principal con submenú -->
+          <!-- Enlaces -->
           <li class="Menu-item">
             <a href="#" class="Menu-li">Collection</a>
+            <!-- Submenu del enlace Collection -->
             <ul class="Submenu">
-              <li><a href="#" class="Submenu-li">Furniture</a></li>
-              <li><a href="#" class="Submenu-li">Lighting</a></li>
-              <li><a href="#" class="Submenu-li">Accessories</a></li>
+              <li class="Submenu-li">
+                <a href="#" class="Submenu-a" id="furniture-link">Furniture</a>
+
+                <div class="Submenu-imgContainer" id="furniture-imgContainer">
+                  <img
+                    class="Submenu-img"
+                    src="img/sofa_blanco.png"
+                    alt="White sofa minimalist"
+                  />
+                </div>
+                
+              </li>
+              <li><a href="#" class="Submenu-a">Lighting</a></li>
+              <li><a href="#" class="Submenu-a">Accessories</a></li>
             </ul>
           </li>
 
@@ -79,10 +93,12 @@
       </footer>
     </div>
 
+    <!-- MAIN -->
     <main class="Main">
       <button class="ButtonProduct">Product Details</button>
     </main>
 
+    <!-- NAV INFERIOR TABS -->
     <nav class="Tabs">
       <div class="Tabs-hr"></div>
 
@@ -99,184 +115,6 @@
       </ul>
     </nav>
 
-    <script>
-      // ____________________________________
-      // Variables
-      // ____________________________________
-      const tabsInfo = [
-        {
-          id: "page1",
-          author: "Michael W. Dreeben",
-          product: "Shell Dining Chair",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
-          file: "silla_negra.png",
-          alt: "Shell Dining Chair in black",
-        },
-        {
-          id: "page2",
-          author: "Jeaper K. Thomas",
-          product: "Dunes Anthrazite Black",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Est aperiam quos totam blanditiis sapiente sit, quasi non excepturi architecto dolorem?",
-          file: "mesa_negra.png",
-          alt: "Dunes Anthrazite table in black",
-        },
-      ];
-      const main = document.querySelector(".Main");
-      const list_btns = document.querySelectorAll(".Tabs-h2");
-
-      //  const btns_tab = document.querySelectorAll(".Tabs-button");
-
-      // Menu
-      const body = document.querySelector("body");
-      const menuIcon = document.getElementById("openMenu");
-      const menu = document.getElementById("menu");
-      const closeMenu = document.getElementById("closeMenu");
-
-      // ____________________________________
-      // Bucles y Funciones
-      // ____________________________________
-
-      // tabsInfo es un bucle que crea para cada tab su contenido,
-      tabsInfo.forEach((tab, index) => {
-        const tabContent = document.createElement("div");
-        tabContent.classList.add("Tabs-content");
-
-        if (index === 0) tabContent.classList.add("u-visible");
-        tabContent.setAttribute("id", tab.id);
-
-        // [DIV: TEXTOS]
-        const textContainer = document.createElement("div");
-        textContainer.classList.add("Main-texts");
-
-        // creamos el autor <h4>
-        const h4 = document.createElement("h4");
-        h4.classList.add("H4");
-        h4.textContent = tab.author;
-
-        // creamos el titulo del producto <h2>
-        const h2 = document.createElement("h2");
-        h2.classList.add("H2");
-        h2.textContent = tab.product;
-
-        //creamos el parrafo de la descripcion <p>
-        const txt = document.createElement("p");
-        txt.classList.add("Main-description");
-        txt.textContent = tab.description;
-
-        // [DIV: IMAGEN]
-
-        //creamos un contenedor para la img <div>
-        const imgContainer = document.createElement("div");
-        imgContainer.classList.add("Img-container");
-
-        //creamos etiqueta <img>
-        const img = document.createElement("img");
-        img.classList.add("Main-img");
-        img.src = `img/${tab.file}`;
-        img.alt = tab.alt;
-
-        // TextContainer es el contenedor padre de los txts del producto
-        imgContainer.appendChild(img);
-        textContainer.appendChild(h4);
-        textContainer.appendChild(h2);
-        textContainer.appendChild(txt);
-
-        // TabContent el contenedor padre de la caja de txts y de la imagen
-        tabContent.appendChild(imgContainer);
-        tabContent.appendChild(textContainer);
-        // Main el el contenedor padre tabContent
-        main.appendChild(tabContent);
-      });
-
-      const list_pages = document.querySelectorAll(".Tabs-content");
-
-      // ACTIVAR LA TAB CORRESPONDIENTE CON CLICK
-      list_btns.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-          console.log(`Tab clickeada: ${index}`);
-          activarTab(index);
-        });
-      });
-
-      // ACTIVAR LA TAB CORRESPONDIENTE CON SCROLL
-      function activarTab(index) {
-        // Actualizar los botones
-        list_btns.forEach((btn, idx) => {
-          if (idx === index) {
-            btn.classList.add("u-active");
-          } else {
-            btn.classList.remove("u-active");
-          }
-        });
-
-        // Actualizar las páginas visibles
-        list_pages.forEach((page, idx) => {
-          if (idx === index) {
-            page.classList.add("u-visible");
-            console.log(`Mostrando página: ${page.id}`);
-
-          } else {
-            page.classList.remove("u-visible");
-          }
-        });
-      }
-
-      // Detectar la sección visible y activar transiciones
-      function detectarSeccion() {
-        list_pages.forEach((page, index) => {
-          const rect = page.getBoundingClientRect();
-
-          // Si la sección está visible (en la mitad de la pantalla), activarla
-          if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-            page.classList.add("u-visible"); // Activar la animación
-            activarTab(index); // Cambiar tab activa
-          } else {
-            page.classList.remove("u-visible"); // Ocultar la animación si no es visible
-          }
-        });
-      }
-
-      // ____________________________________
-      // Eventos
-      // ____________________________________
-
-      // Abrir y cerrar el  Menu
-      menuIcon.addEventListener("click", () => {
-        body.classList.add("is-menuOpen");
-        menu.classList.add("u-menuOpen");
-      });
-
-      closeMenu.addEventListener("click", () => {
-        body.classList.remove("is-menuOpen");
-        menu.classList.remove("u-menuOpen");
-      });
-
-      // Seleccionar todos los elementos del menú principal
-      const menuItems = document.querySelectorAll(".Menu-item");
-
-      // Recorrer cada elemento y agregar un event listener
-      menuItems.forEach((item) => {
-        const link = item.querySelector(".Menu-li"); // El enlace principal
-        const submenu = item.querySelector(".Submenu"); // El submenú
-
-        if (submenu) {
-          // Agregar evento de clic
-          link.addEventListener("click", (event) => {
-            event.preventDefault(); // Evitar comportamiento por defecto
-
-            // Alternar la clase para mostrar/ocultar el submenú
-            submenu.classList.toggle("is-submenuOpen");
-          });
-        }
-      });
-
-      // Detectar scroll en el contenedor principal
-      main.addEventListener("scroll", detectarSeccion);
-
-      // Inicializar la primera tab
-      activarTab(0);
-    </script>
+<script defer src="js/script.js"></script>
   </body>
 </html>
